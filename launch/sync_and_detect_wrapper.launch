@@ -1,0 +1,37 @@
+<launch>
+  <!-- -->
+  <arg name="detector_type" default="Umich"/>
+  <arg name="annotate_images" default="true" />
+  <arg name="images_are_compressed" default="true" />
+  <!-- -->
+  <arg name="bag00" value="Day1/inspot_2018-08-01-15-27-11.bag" />
+  <arg name="bag01" value="Day1/inspot_2018-08-01-16-10-32.bag" />
+  <arg name="bag02" value="Day1/inspot_2018-08-01-16-21-59.bag" />
+  <arg name="bag03" value="Day2/inspot_2018-08-02-11-37-52.bag" />
+  <arg name="bag04" value="Day2/inspot_2018-08-02-12-08-17.bag" />
+  <arg name="bag05" value="Day2/inspot_2018-08-02-12-30-32.bag" />
+  <arg name="bag06" value="Day2/inspot_2018-08-02-12-47-28.bag" />
+  <arg name="bag07" value="Day2/inspot_2018-08-02-13-11-19.bag" />
+  <!-- -->
+  <arg name="start_time00" value="160" />
+  <arg name="start_time01" value="135" />
+  <arg name="start_time02" value="35" />
+  <arg name="start_time03" value="30" />
+  <arg name="start_time04" value="30" />
+  <arg name="start_time05" value="15" />
+  <arg name="start_time06" value="35" />
+  <arg name="start_time07" value="23" />
+  <!-- -->
+  <arg name="start_time"   default="$(arg start_time01)"/>
+  <arg name="bagfile_path" default="$(env ROSBAG_FOLDER)/AprilTagAugust2018/$(arg bag01)"/>
+  <!-- -->
+
+  <include file="$(find tagslam)/launch/sync_and_detect.launch">
+    <arg name="bag" value="$(arg bagfile_path)"/>
+    <arg name="detector_type" value="$(arg detector_type)"/>
+    <arg name="start_time" value="$(arg start_time)"/>
+    <arg name="annotate_images" value="$(arg annotate_images)"/>
+    <arg name="images_are_compressed" value="$(arg images_are_compressed)"/>
+  </include>
+
+</launch>

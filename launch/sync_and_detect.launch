@@ -1,20 +1,40 @@
 <launch>
+
   <arg name="output" default="screen"/>
   <arg name="bag" default=""/>
-  <arg name="detector_type" default="Umich"/>
+  <arg name="detector_type" default=""/>
   <arg name="start_time" default="0.0"/>
-#	launch-prefix="gdb -ex run --args"
+  <arg name="annotate_images" default="false" />
+  <arg name="images_are_compressed" default="false" />
+  
   <node pkg="tagslam" type="sync_and_detect_node" name="sync_and_detect"
-	output="$(arg output)" clear_params="True">
-    <rosparam param="image_topics"> ["/fla/ovc_node/left/image_raw", "/fla/ovc_node/right/image_raw"]</rosparam>
-    <rosparam param="image_output_topics"> ["/fla/ovc_node/left/compressed", "/fla/ovc_node/right/compressed"]</rosparam>
-    <rosparam param="tag_topics"> ["/fla/ovc_node/left/tags", "/fla/ovc_node/right/tags"]</rosparam>
+    output="$(arg output)" clear_params="True">
+    <!-- -->
+    <rosparam param="image_topics"> [
+      "/quadruple/top_right/image_raw/compressed", 
+      "/quadruple/bottom_right/image_raw/compressed", 
+      "/quadruple/bottom_left/image_raw/compressed", 
+      "/quadruple/top_left/image_raw/compressed"
+    ] </rosparam>
+    <rosparam param="image_output_topics"> [
+      "/quadruple/top_right/image_raw/annotated/compressed", 
+      "/quadruple/bottom_right/image_raw/annotated/compressed", 
+      "/quadruple/bottom_left/image_raw/annotated/compressed", 
+      "/quadruple/top_left/image_raw/annotated/compressed"
+    ] </rosparam>
+    <rosparam param="tag_topics"> [
+     "/quadruple/top_right/image_raw/tags", 
+     "/quadruple/bottom_right/image_raw/tags", 
+     "/quadruple/bottom_left/image_raw/tags", 
+     "/quadruple/top_left/image_raw/tags"
+    ] </rosparam>
     <param name="bag_file" value="$(arg bag)"/>
     <param name="detector_type" value="$(arg detector_type)"/>
     <param name="black_border_width" value="1"/>
-    <param name="annotate_images" value="false"/>
+    <param name="annotate_images" value="$(arg annotate_images)"/>
     <param name="start_time" value="$(arg start_time)"/>
     <param name="output_bag_file" value="$(arg bag)_output.bag"/>
     <param name="max_number_frames" value="500000"/>
+    <param name="images_are_compressed" value="$(arg images_are_compressed)"/>
   </node>
 </launch>

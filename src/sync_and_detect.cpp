@@ -171,9 +171,9 @@ namespace tagslam {
     ROS_INFO_STREAM("playing from file: " << fname);
     double start_time(0);
     nh_.param<double>("start_time", start_time, 0);
-    ros::Time t_start(start_time);
-    rosbag::View view(bag, rosbag::TopicQuery(imageTopics_));
-    rosbag::View t0View(bag);
+    ros::Time t_Start = rosbag::View(bag).getBeginTime() + ros::Duration(start_time);
+    ROS_INFO_STREAM("Starting at time: " << std::setprecision(5) << t_Start.toSec());
+    rosbag::View view(bag, rosbag::TopicQuery(imageTopics_), t_Start);
     for (const auto i: irange(0ul, tagTopics_.size())) {
       ROS_INFO_STREAM("image topic: "  << imageTopics_[i] << " maps to: " << tagTopics_[i]);
     }
