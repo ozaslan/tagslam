@@ -14,7 +14,7 @@
   <arg name="bag07" value="Day2/inspot_2018-08-02-13-11-19.bag" />
   <!-- -->
   <arg name="start_time00" value="160" />
-  <arg name="start_time01" value="135" />
+  <arg name="start_time01" value="35" />
   <arg name="start_time02" value="35" />
   <arg name="start_time03" value="30" />
   <arg name="start_time04" value="30" />
@@ -22,8 +22,8 @@
   <arg name="start_time06" value="35" />
   <arg name="start_time07" value="23" />
   <!-- -->
-  <arg name="start_time"   default="$(arg start_time01)"/>
-  <arg name="bagfile_path" default="$(env ROSBAG_FOLDER)/AprilTagAugust2018/$(arg bag01)"/>
+  <arg name="start_time"   default="$(arg start_time07)"/>
+  <arg name="bagfile_path" default="$(env ROSBAG_FOLDER)/AprilTagAugust2018/$(arg bag07)"/>
   <!-- -->
 
   <include file="$(find tagslam)/launch/sync_and_detect.launch">
